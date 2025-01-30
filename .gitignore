@@ -1,0 +1,11 @@
+.cache/
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CMakeCache.txt
+compile_commands.json
+logs.txt
+install_manifest.txt
+
+# Targets
+libinicpp.a
