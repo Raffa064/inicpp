@@ -1,6 +1,6 @@
 #include <array>
 #include <fstream>
-#include <ini.h>
+#include <ini.hpp>
 #include <iostream>
 #include <ostream>
 #include <regex>
