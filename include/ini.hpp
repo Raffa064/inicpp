@@ -29,4 +29,7 @@ public:
   friend bool load(std::string path, Document &doc);
 };
 
+bool save(std::string path, Document &doc);
+bool load(std::string path, Document &doc);
+
 } // namespace ini
