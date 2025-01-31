@@ -28,8 +28,8 @@ public:
   std::string get(std::string entry_path);
   std::string get_df(std::string entry_path, std::string df);
 
-  friend bool ini::save(std::string path, Document &doc);
-  friend bool ini::load(std::string path, Document &doc);
+  friend bool save(std::string, Document &);
+  friend bool load(std::string, Document &);
 };
 
 } // namespace ini
