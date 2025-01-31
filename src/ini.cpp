@@ -3,12 +3,15 @@
 #include <ini.h>
 #include <iostream>
 #include <ostream>
+#include <regex>
 #include <sstream>
 #include <string>
 
 namespace ini {
 
-#define test std::cout << "Breakpoint test" << std::endl;
+const std::regex REGEX_SECTION("\\s*\\[([^\\]]*)\\]\\s*");
+const std::regex
+    REGEX_ENTRY("\\s*([a-zA-Z$_][a-zA-Z$_0-9]*)\\s*=\\s*([^\n]*)\\s*");
 
 std::array<std::string, 2> get_entry_path_seg(std::string input) {
   int pIndex = input.find(".");
@@ -80,6 +83,34 @@ bool save(std::string path, Document &doc) {
   return false;
 }
 
-bool load(std::string path, Document &doc) { return false; }
+bool load(std::string path, Document &doc) {
+  std::ifstream file(path);
+
+  if (file) {
+    std::string line;
+
+    std::string curr;
+    std::smatch sm;
+    while (std::getline(file, line)) {
+      if (std::regex_match(line, sm, REGEX_SECTION)) {
+        curr = sm[1];
+        doc.sections.push_back({.name = curr});
+        continue;
+      }
+
+      if (std::regex_match(line, sm, REGEX_ENTRY)) {
+        doc.set(curr + "." + sm[1].str(), sm[2]);
+        continue;
+      }
+
+      if (!line.empty())
+        return false;
+    }
+
+    return true;
+  }
+
+  return false;
+}
 
 } // namespace ini
