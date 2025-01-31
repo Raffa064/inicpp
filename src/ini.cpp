@@ -62,7 +62,7 @@ std::string Document::get_df(std::string entry_path, std::string df) {
   return value;
 }
 
-bool ini::save(std::string path, Document &doc) {
+bool save(std::string path, Document &doc) {
   std::stringstream ss;
 
   for (auto s : doc.sections) {
@@ -83,7 +83,7 @@ bool ini::save(std::string path, Document &doc) {
   return false;
 }
 
-bool ini::load(std::string path, Document &doc) {
+bool load(std::string path, Document &doc) {
   std::ifstream file(path);
 
   if (file) {

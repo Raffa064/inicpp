@@ -8,6 +8,9 @@ namespace ini {
 
 class Document;
 
+bool save(std::string path, Document &doc);
+bool load(std::string path, Document &doc);
+
 typedef std::map<std::string, std::string> smap;
 
 struct section {
@@ -25,11 +28,8 @@ public:
   std::string get(std::string entry_path);
   std::string get_df(std::string entry_path, std::string df);
 
-  friend bool save(std::string path, Document &doc);
-  friend bool load(std::string path, Document &doc);
+  friend bool ini::save(std::string path, Document &doc);
+  friend bool ini::load(std::string path, Document &doc);
 };
-
-bool save(std::string path, Document &doc);
-bool load(std::string path, Document &doc);
 
 } // namespace ini
